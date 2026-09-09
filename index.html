@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大阪・奈良行程表｜2026/9/11–9/15</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2EA;
+    --paper-2:#EFE9DB;
+    --ink:#2B2823;
+    --ink-soft:#5B564C;
+    --line:#DCD5C8;
+    --rail:#2F4858;
+    --rail-2:#4A6B7A;
+    --accent:#C1502E;
+    --white:#FFFDF8;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Noto Serif TC', serif;
+    margin:0;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding:64px 24px 40px;
+    background:var(--rail);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    right:-40px; top:-40px;
+    width:220px; height:220px;
+    border:1px solid rgba(246,242,234,0.18);
+    border-radius:50%;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute;
+    right:20px; bottom:-60px;
+    width:150px; height:150px;
+    border:1px solid rgba(246,242,234,0.12);
+    border-radius:50%;
+  }
+  .hero-inner{ position:relative; z-index:1; max-width:640px; margin:0 auto; }
+  .hero-kicker{
+    font-size:13px;
+    letter-spacing:0.14em;
+    color:var(--rail-2);
+    background:rgba(246,242,234,0.9);
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:2px;
+    color:var(--rail);
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  h1.title{
+    font-size:clamp(32px,8vw,46px);
+    font-weight:900;
+    line-height:1.25;
+    letter-spacing:0.02em;
+  }
+  .hero-sub{
+    margin-top:14px;
+    font-size:15px;
+    color:#D8DEE1;
+    max-width:46ch;
+  }
+  .hero-route{
+    margin-top:28px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    color:var(--paper);
+    flex-wrap:wrap;
+  }
+  .hero-route .stop{
+    background:rgba(246,242,234,0.1);
+    border:1px solid rgba(246,242,234,0.35);
+    padding:5px 12px;
+    border-radius:999px;
+  }
+  .hero-route .arrow{ opacity:0.5; }
+
+  /* ---------- Day nav ---------- */
+  nav.daynav{
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:10px 16px;
+    -webkit-overflow-scrolling:touch;
+  }
+  nav.daynav::-webkit-scrollbar{ display:none; }
+  nav.daynav a{
+    display:inline-block;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:500;
+    padding:7px 13px;
+    border-radius:999px;
+    margin-right:6px;
+    border:1px solid var(--line);
+    background:var(--white);
+  }
+  nav.daynav a:active{ background:var(--rail); color:var(--paper); }
+
+  /* ---------- Days ---------- */
+  main{ max-width:640px; margin:0 auto; padding:0 0 60px; }
+
+  section.day{ padding:36px 20px 8px; scroll-margin-top:56px; }
+  section.day + section.day{ border-top:1px solid var(--line); }
+
+  .day-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:4px;
+  }
+  .day-num{
+    font-family:'Noto Serif TC', serif;
+    font-weight:900;
+    font-size:13px;
+    color:var(--white);
+    background:var(--rail);
+    width:26px; height:26px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex:none;
+  }
+  .day-date{
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:22px;
+  }
+  .day-weekday{
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .day-theme{
+    margin:6px 0 22px 38px;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* timeline */
+  ol.timeline{
+    list-style:none;
+    margin:0 0 0 38px;
+    padding:0;
+    border-left:2px solid var(--line);
+    position:relative;
+  }
+  ol.timeline li{
+    position:relative;
+    padding:0 0 26px 24px;
+  }
+  ol.timeline li::before{
+    content:"";
+    position:absolute;
+    left:-6px; top:5px;
+    width:10px; height:10px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--rail-2);
+  }
+  ol.timeline li.highlight::before{
+    background:var(--accent);
+    border-color:var(--accent);
+    width:12px; height:12px;
+    left:-7px;
+  }
+  .ev-time{
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--rail);
+    display:block;
+    margin-bottom:2px;
+  }
+  .ev-title{
+    font-size:16px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .ev-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  li.highlight .ev-title{ color:var(--accent); font-weight:700; }
+
+  /* map link */
+  .ev-title a.maplink{
+    color:inherit;
+    text-decoration:none;
+    border-bottom:1px dashed var(--rail-2);
+  }
+  .ev-title a.maplink::after{
+    content:"↗";
+    font-size:12px;
+    margin-left:4px;
+    color:var(--rail-2);
+  }
+  li.highlight .ev-title a.maplink{ border-bottom-color:var(--accent); }
+  li.highlight .ev-title a.maplink::after{ color:var(--accent); }
+
+  /* transfer route diagram */
+  .route-steps{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:6px;
+    margin-top:8px;
+    padding:10px 12px;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:6px;
+  }
+  .route-steps .stn{
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink);
+    background:var(--paper-2);
+    padding:3px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .route-steps .ln{
+    font-size:12px;
+    color:var(--rail);
+    display:flex;
+    align-items:center;
+    gap:4px;
+    white-space:nowrap;
+  }
+  .route-steps .ln::before,
+  .route-steps .ln::after{
+    content:"—";
+    color:var(--line);
+  }
+  .route-steps .transfer-tag{
+    font-size:11px;
+    color:var(--accent);
+    border:1px solid var(--accent);
+    padding:1px 6px;
+    border-radius:999px;
+    margin-left:2px;
+  }
+
+  /* gap divider between morning/segments */
+  li.gap{ padding-top:2px; padding-bottom:12px; }
+  li.gap::before{ display:none; }
+  li.gap .gapline{
+    height:1px;
+    background:var(--line);
+    margin-left:-24px;
+  }
+
+  footer{
+    text-align:center;
+    padding:36px 20px 60px;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-kicker">TAICHUNG → OSAKA → NARA</span>
+    <h1 class="title">大阪・奈良<br>五日行程表</h1>
+    <p class="hero-sub">2026年9月11日（五）〜9月15日（二）。從桃園出發，落腳心齋橋，途經勝尾寺、梅田、奈良公園、生駒山，最後一天在環球影城度過萬聖節。</p>
+    <div class="hero-route">
+      <span class="stop">台中</span><span class="arrow">✈</span>
+      <span class="stop">大阪</span><span class="arrow">→</span>
+      <span class="stop">箕面</span><span class="arrow">→</span>
+      <span class="stop">奈良</span><span class="arrow">→</span>
+      <span class="stop">生駒</span><span class="arrow">→</span>
+      <span class="stop">USJ</span><span class="arrow">→</span>
+      <span class="stop">難波</span>
+    </div>
+  </div>
+</header>
+
+<nav class="daynav">
+  <a href="#day1">9/11 出發日</a>
+  <a href="#day2">9/12 箕面・梅田</a>
+  <a href="#day3">9/13 奈良・生駒</a>
+  <a href="#day4">9/14 環球影城</a>
+  <a href="#day5">9/15 返程日</a>
+</nav>
+
+<main>
+
+  <!-- DAY 1 -->
+  <section class="day" id="day1">
+    <div class="day-head">
+      <span class="day-num">1</span>
+      <span class="day-date">9月11日</span>
+      <span class="day-weekday">星期五</span>
+    </div>
+    <p class="day-theme">出發日｜台中 → 桃園 → 關西 → 大鳥大社 → 心齋橋</p>
+    <ol class="timeline">
+      <li><span class="ev-time">02:30–05:00</span><span class="ev-title">台中 → 桃園機場T2</span><span class="ev-note">統聯客運</span></li>
+      <li><span class="ev-time">05:00–07:15</span><span class="ev-title">報到、托運、安檢、早餐</span><span class="ev-note">建議05:00抵達</span></li>
+      <li class="highlight"><span class="ev-time">08:15–12:00</span><span class="ev-title">桃機T2 ➜ 關西機場T1</span><span class="ev-note">中華航空 CI156</span></li>
+      <li><span class="ev-time">12:00–13:20</span><span class="ev-title">入境、領行李</span><span class="ev-note">預留約80分鐘</span></li>
+      <li><span class="ev-time">13:35–14:14</span><span class="ev-title">關西機場T1 ➜ JR鳳站</span><span class="ev-note">JR關空快速至鳳站，步行約15分鐘</span></li>
+      <li><span class="ev-time">14:10–14:20</span><span class="ev-title">鳳站寄放行李</span></li>
+      <li><span class="ev-time">14:20–15:20</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%B3%A5%E5%A4%A7%E7%A4%BE" target="_blank" rel="noopener">大鳥大社</a></span><span class="ev-note">鳳站西口步行約5分鐘</span></li>
+      <li><span class="ev-time">15:20–16:20</span><span class="ev-title">鳳站 → 住宿</span><span class="ev-note">JR至新今宮</span></li>
+      <li><span class="ev-time">16:20–17:00</span><span class="ev-title">抵達住宿｜<a class="maplink" href="https://www.google.com/maps/search/?api=1&query=HOTEL+LEGALIE+Shinsaibashi+Osaka" target="_blank" rel="noopener">HOTEL LEGALIE</a> 入住、休息</span></li>
+      <li><span class="ev-time">17:20–19:55</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E6%96%8E%E6%A9%8B+Osaka" target="_blank" rel="noopener">心齋橋</a></span><span class="ev-note">自由逛街</span></li>
+      <li class="highlight"><span class="ev-time">20:15–22:00</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Sakana+no+ISHISAKA+Osaka" target="_blank" rel="noopener">Sakana no ISHISAKA</a></span><span class="ev-note">已預約</span></li>
+      <li><span class="ev-time">22:00–22:20</span><span class="ev-title">返回住宿</span><span class="ev-note">步行或地鐵｜大阪地鐵心齋橋站2號出口步行約1分鐘</span></li>
+    </ol>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day" id="day2">
+    <div class="day-head">
+      <span class="day-num">2</span>
+      <span class="day-date">9月12日</span>
+      <span class="day-weekday">星期六</span>
+    </div>
+    <p class="day-theme">箕面萱野 → 勝尾寺 → 梅田一日</p>
+    <ol class="timeline">
+      <li><span class="ev-time">7:15</span><span class="ev-title">從住宿出發</span><span class="ev-note">早餐先準備好</span></li>
+      <li><span class="ev-time">07:25–08:30</span><span class="ev-title">惠美須町 → 箕面萱野</span><span class="ev-note">堺筋線至動物園前，轉御堂筋線／北大阪急行</span>
+        <div class="route-steps">
+          <span class="stn">惠美須町</span>
+          <span class="ln">堺筋線</span>
+          <span class="stn">動物園前</span>
+          <span class="transfer-tag">轉乘</span>
+          <span class="ln">御堂筋線 → 北大阪急行直通</span>
+          <span class="stn">箕面萱野</span>
+        </div>
+      </li>
+      <li><span class="ev-time">08:30–08:55</span><span class="ev-title">前往公車站、排隊</span><span class="ev-note">週六建議提早排</span></li>
+      <li><span class="ev-time">09:00–約09:22</span><span class="ev-title">箕面萱野 → 勝尾寺</span><span class="ev-note">直達公車</span></li>
+      <li class="highlight"><span class="ev-time">09:25–11:10</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%8B%9D%E5%B0%BE%E5%AF%BA+Minoh" target="_blank" rel="noopener">勝尾寺</a></span><span class="ev-note">約1小時45分鐘</span></li>
+      <li><span class="ev-time">11:20–約11:50</span><span class="ev-title">勝尾寺 → 箕面萱野</span><span class="ev-note">搭現場下一班回程公車</span></li>
+      <li><span class="ev-time">12:00–12:45</span><span class="ev-title">箕面萱野 → 梅田</span><span class="ev-note">北大阪急行直通御堂筋線</span></li>
+      <li><span class="ev-time">13:30–15:00</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=MORITAYA+LUCUA+1100+Osaka" target="_blank" rel="noopener">MORITAYA 午餐</a></span><span class="ev-note">LUCUA 1100 十樓</span></li>
+      <li><span class="ev-time">15:10–15:50</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%9C%B2%E5%A4%A9%E7%A5%9E%E7%A4%BE+Osaka" target="_blank" rel="noopener">露天神社</a></span><span class="ev-note">拍巨大御守、戀愛神社題材</span></li>
+      <li><span class="ev-time">16:00–17:00</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Grand+Green+Osaka" target="_blank" rel="noopener">Grand Green Osaka</a></span><span class="ev-note">大阪車站旁城市公園、短影音拍攝</span></li>
+      <li><span class="ev-time">17:00–18:30</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%8B%E9%83%BD%E5%85%AB%E5%96%9C+%E6%A2%85%E7%94%B0" target="_blank" rel="noopener">梅田、友都八喜</a></span><span class="ev-note">購物</span></li>
+      <li><span class="ev-time">18:30–19:20</span><span class="ev-title">簡單晚餐或甜點</span><span class="ev-note">午餐較豐盛，不必安排大餐</span></li>
+      <li class="highlight"><span class="ev-time">19:40–21:20</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Umeda+Sky+Building+Floating+Garden+Observatory" target="_blank" rel="noopener">梅田藍天大廈空中庭園</a></span><span class="ev-note">夜景</span></li>
+      <li><span class="ev-time">約22:15</span><span class="ev-title">返回住宿</span><span class="ev-note">御堂筋線轉乘</span></li>
+    </ol>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day" id="day3">
+    <div class="day-head">
+      <span class="day-num">3</span>
+      <span class="day-date">9月13日</span>
+      <span class="day-weekday">星期日</span>
+    </div>
+    <p class="day-theme">奈良公園、鹿與神社 → 生駒山遊園地夜景</p>
+    <ol class="timeline">
+      <li><span class="ev-time">8:15</span><span class="ev-title">從住宿出發</span><span class="ev-note">早餐在住宿附近解決</span></li>
+      <li><span class="ev-time">08:35–09:20</span><span class="ev-title">近鐵日本橋 → 近鐵奈良</span><span class="ev-note">近鐵奈良線快速急行</span></li>
+      <li><span class="ev-time">09:20–10:00</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E8%88%88%E7%A6%8F%E5%AF%BA+Nara" target="_blank" rel="noopener">興福寺、奈良公園入口</a></span><span class="ev-note">步行</span></li>
+      <li><span class="ev-time">10:00–10:30</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%AD%E8%B0%B7%E5%A0%82+Nara" target="_blank" rel="noopener">中谷堂</a></span><span class="ev-note">麻糬點心</span></li>
+      <li class="highlight"><span class="ev-time">10:30–11:30</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Nara+Park" target="_blank" rel="noopener">奈良公園、餵鹿</a></span><span class="ev-note">拍攝</span></li>
+      <li><span class="ev-time">11:30–12:30</span><span class="ev-title">奈良午餐</span><span class="ev-note">奈良公園周邊</span></li>
+      <li><span class="ev-time">12:40–13:40</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%98%A5%E6%97%A5%E5%A4%A7%E7%A4%BE+Nara" target="_blank" rel="noopener">春日大社</a></span><span class="ev-note">可搭公車縮短步行</span></li>
+      <li><span class="ev-time">13:50–14:40</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E8%8B%A5%E8%8D%89%E5%B1%B1+Nara" target="_blank" rel="noopener">若草山</a></span><span class="ev-note">以山腳及第一觀景區為主</span></li>
+      <li><span class="ev-time">14:40–15:10</span><span class="ev-title">返回近鐵奈良站</span><span class="ev-note">建議搭公車或計程車</span></li>
+      <li><span class="ev-time">15:15–15:40</span><span class="ev-title">近鐵奈良 → 生駒站</span><span class="ev-note">近鐵奈良線</span></li>
+      <li><span class="ev-time">15:40–16:10</span><span class="ev-title">鳥居前 → 生駒山上</span><span class="ev-note">纜車分兩段，寶山寺站需下車換車廂</span>
+        <div class="route-steps">
+          <span class="stn">鳥居前</span>
+          <span class="ln">生駒鋼索線・寶山寺線</span>
+          <span class="stn">寶山寺</span>
+          <span class="transfer-tag">換車廂</span>
+          <span class="ln">生駒鋼索線・山上線</span>
+          <span class="stn">生駒山上</span>
+        </div>
+      </li>
+      <li class="highlight"><span class="ev-time">16:10–19:35</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E7%94%9F%E9%A7%92%E5%B1%B1%E4%B8%8A%E9%81%8A%E5%9C%92%E5%9C%B0" target="_blank" rel="noopener">生駒山上遊園地</a></span><span class="ev-note">遊樂設施、夕陽、夜景</span></li>
+      <li><span class="ev-time">19:35–19:55</span><span class="ev-title">停止排設施、前往纜車站</span><span class="ev-note">保留拍夜景時間</span></li>
+      <li><span class="ev-time">20:09</span><span class="ev-title">生駒山上 → 鳥居前</span><span class="ev-note">建議搭這班下山，寶山寺站同樣需換車廂</span>
+        <div class="route-steps">
+          <span class="stn">生駒山上</span>
+          <span class="ln">生駒鋼索線・山上線</span>
+          <span class="stn">寶山寺</span>
+          <span class="transfer-tag">換車廂</span>
+          <span class="ln">生駒鋼索線・寶山寺線</span>
+          <span class="stn">鳥居前</span>
+        </div>
+      </li>
+      <li><span class="ev-time">20:30–21:15</span><span class="ev-title">生駒 → 近鐵日本橋</span><span class="ev-note">近鐵奈良線</span></li>
+      <li><span class="ev-time">約21:30</span><span class="ev-title">返回住宿</span><span class="ev-note">附近吃宵夜</span></li>
+    </ol>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="day" id="day4">
+    <div class="day-head">
+      <span class="day-num">4</span>
+      <span class="day-date">9月14日</span>
+      <span class="day-weekday">星期一</span>
+    </div>
+    <p class="day-theme">Universal Studios Japan｜萬聖節活動期間</p>
+    <ol class="timeline">
+      <li><span class="ev-time">6:30</span><span class="ev-title">起床、早餐</span><span class="ev-note">前一晚先整理用品</span></li>
+      <li><span class="ev-time">07:00–07:50</span><span class="ev-title">住宿 → Universal City</span><span class="ev-note">JR新今宮／西九條轉夢咲線</span>
+        <div class="route-steps">
+          <span class="stn">新今宮</span>
+          <span class="ln">JR大阪環狀線</span>
+          <span class="stn">西九條</span>
+          <span class="transfer-tag">轉乘</span>
+          <span class="ln">JR夢咲線</span>
+          <span class="stn">Universal City</span>
+        </div>
+      </li>
+      <li><span class="ev-time">07:50–開園</span><span class="ev-title">排隊等候入場</span><span class="ev-note">官方可能提早開園</span></li>
+      <li><span class="ev-time">開園–09:50</span><span class="ev-title">先玩其他熱門設施</span><span class="ev-note">不用搶任天堂入場券</span></li>
+      <li><span class="ev-time">9:50</span><span class="ev-title">前往超級任天堂世界入口</span><span class="ev-note">不要壓指定時間</span></li>
+      <li class="highlight"><span class="ev-time">10:10–10:40</span><span class="ev-title">瑪利歐賽車：庫巴的挑戰書</span><span class="ev-note">快速通關｜超級任天堂世界內</span></li>
+      <li class="highlight"><span class="ev-time">10:40–11:10</span><span class="ev-title">咚奇剛的瘋狂礦車</span><span class="ev-note">快速通關｜超級任天堂世界內</span></li>
+      <li><span class="ev-time">11:10–傍晚</span><span class="ev-title">其他園區、遊樂設施、餐飲</span><span class="ev-note">詳細攻略另外安排</span></li>
+      <li class="highlight"><span class="ev-time">傍晚–晚上</span><span class="ev-title">萬聖節活動、驚魂夜</span><span class="ev-note">9/14已在活動期間</span></li>
+      <li><span class="ev-time">約20:30–21:30</span><span class="ev-title">視體力離園</span><span class="ev-note">不一定需要撐到最後</span></li>
+      <li><span class="ev-time">約22:00</span><span class="ev-title">返回住宿</span><span class="ev-note">JR夢咲線轉大阪環狀線</span>
+        <div class="route-steps">
+          <span class="stn">Universal City</span>
+          <span class="ln">JR夢咲線</span>
+          <span class="stn">西九條</span>
+          <span class="transfer-tag">轉乘</span>
+          <span class="ln">JR大阪環狀線</span>
+          <span class="stn">新今宮</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- DAY 5 -->
+  <section class="day" id="day5">
+    <div class="day-head">
+      <span class="day-num">5</span>
+      <span class="day-date">9月15日</span>
+      <span class="day-weekday">星期二</span>
+    </div>
+    <p class="day-theme">難波最後巡禮 → 返程</p>
+    <ol class="timeline">
+      <li><span class="ev-time">08:00–08:45</span><span class="ev-title">早餐、整理行李</span><span class="ev-note">飯店附近</span></li>
+      <li><span class="ev-time">9:00</span><span class="ev-title">退房、寄放行李</span><span class="ev-note">行李留飯店</span></li>
+      <li><span class="ev-time">09:20–10:00</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%9B%A3%E6%B3%A2%E5%85%AB%E9%98%AA%E7%A5%9E%E7%A4%BE" target="_blank" rel="noopener">難波八阪神社</a></span><span class="ev-note">巨型獅子殿、拍攝</span></li>
+      <li><span class="ev-time">10:15–11:30</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%9B%A3%E6%B3%A2CITY+%E9%9B%A3%E6%B3%A2PARKS" target="_blank" rel="noopener">難波CITY／難波PARKS</a></span><span class="ev-note">最後購物</span></li>
+      <li><span class="ev-time">11:30–12:45</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E5%91%B3%E4%B9%83%E5%AE%B6+%E9%9B%A3%E6%B3%A2" target="_blank" rel="noopener">午餐</a></span><span class="ev-note">味乃家大阪燒或附近備選</span></li>
+      <li><span class="ev-time">12:45–13:40</span><span class="ev-title"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%BB%91%E9%96%80%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">黑門市場或日本橋商圈</a></span><span class="ev-note">只能選一區，避免拖延</span></li>
+      <li><span class="ev-time">13:40–14:10</span><span class="ev-title">回飯店拿行李</span><span class="ev-note">確認沒有遺漏</span></li>
+      <li><span class="ev-time">14:10–14:30</span><span class="ev-title">飯店 → 南海難波站</span><span class="ev-note">4人帶行李建議計程車</span></li>
+      <li><span class="ev-time">14:40–15:30</span><span class="ev-title">南海難波 → 關西機場</span><span class="ev-note">Rapi:t 或空港急行</span></li>
+      <li><span class="ev-time">15:30–18:20</span><span class="ev-title">報到、托運、安檢、機場用餐</span><span class="ev-note">保留充足時間</span></li>
+      <li class="highlight"><span class="ev-time">19:05–21:10</span><span class="ev-title">關西機場 → 桃園機場</span><span class="ev-note">中華航空 CI173</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>大阪・奈良行程表　2026/9/11–9/15</footer>
+
+</body>
+</html>
